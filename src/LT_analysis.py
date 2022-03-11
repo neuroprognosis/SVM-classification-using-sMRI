@@ -502,24 +502,5 @@ for item in comparison_items_lr:
         clf = OneVsRestClassifier(SVC(kernel='linear', probability=True)) 
     draw_multi_roc_curve(clf, item["X"], item["y"], title = '')
     
-# find optimum threshold 
-for item in comparison_items_lr:
-    print(item["name"])
-    print(Counter(item["y"]))
-    if(item["name"]=='weighted_SVM'):
-        print('Weighted Classification')
-        clf = SVC(kernel='linear', decision_function_shape='ovr', 
-                  probability=True, class_weight = 'balanced')
-    else:
-       clf = SVC(kernel='linear', decision_function_shape='ovr', 
-                 probability=True)   
-    
-    clf.fit(item["X"], item["y"])
-    sco = roc_auc_score(y_test, clf.predict_proba(X_test), multi_class='ovr')
-    print(sco)
-    
-    
-
-
 
 
